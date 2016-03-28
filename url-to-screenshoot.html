@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>url to Screenshoot</title>
+        <meta name="description" content="Take screenshot by inserting website url">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Open graph meta -->
+<meta property="og:url"                content="rayhan.info" />
+<meta property="og:title"              content="Url to screenshot" />
+<meta property="og:description"        content="Take screenshot by inserting website url" />
+<meta property="og:image"              content="http://i.imgur.com/S61q3XQ.png" />
+
+
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+<link href='https://fonts.googleapis.com/css?family=Raleway:300,400' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+
+<style>
+body{
+	font-family: 'Raleway', sans-serif;
+}
+header {
+	padding: 5% 0;
+	background: #644A8C;
+	color: #fff;
+}
+.call-to-action{
+	margin-bottom: 35px;
+}
+.call-to-action h2{
+	font-size: 55px;
+	font-family: 'Slabo 27px', serif;
+}
+.call-to-action p{
+	font-size: 25px;
+}
+#url {
+    font-size: 45px;
+    color: #000;
+    padding: 15px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+.preview_and_download {
+    margin: 5% 0;
+}
+#dl_img_width {
+    font-size: 38px;
+    width: 200px;
+}
+.dl_options {
+    padding: 30px 0;
+}
+
+footer {
+    color: #fff;
+    background: #644A8C;
+    width: 100%;
+    padding: 10px 0;
+    margin: 8px 0;
+}
+</style>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <header>
+        	<div class="container text-center">
+        		<div class="row">
+        				<div class="col-md-12">
+        					<div class="call-to-action">
+        						<h2>Url to Screenshot</h2>
+        						<p>Take screenshot by page url</p>
+        					</div>
+        					<div class="url-field-wrapper">
+        						<input type="url" id="url" placeholder="Page url...">
+        					</div>
+
+        				</div>
+        		</div>
+        	</div>
+        </header>
+
+        <div class="preview_and_download" style="display: none;">
+        	<div class="container">
+        		<div class="row">
+        			<div class="page_preview text-center">
+        			<h3>Preview</h3>
+        				<img id="urlPreview" src="loading.gif" alt="">
+        			</div>
+        			<div class="downloadScreenshot">
+        				<div class="dl_options text-center">
+        					<p><b>Define screenshot width (max width 1200px)</b></p>
+        					<input type="number" value="505" id="dl_img_width">
+
+        				</div>
+        				<div class="dl_btn text-center">
+        					<a id="screenshot_dl_btn" class="btn btn-default btn-lg" download><span class="glyphicon glyphicon-circle-arrow-down"></span> Download screenshot</a>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+<div style="clear: both;"></div>
+<footer>
+    <div class="footer-text text-center">
+         <h3>Code is poetry</h3>
+    </div>
+</footer>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+        <script>
+        	jQuery(document).ready(function($) {
+                var $dlBtn = $('#screenshot_dl_btn');
+                var $getWidth = $('#dl_img_width');
+                var $urlPreview = $('#urlPreview');
+                var $url = $('#url');
+        		$url.keyup(function() {
+        			var pageUrl = $('#url').val();
+        			
+        			if ( pageUrl != '' ) {
+        				$('.preview_and_download').slideDown('fast');
+        				$urlPreview.attr('src', 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageUrl + '&width=505');
+        				$dlBtn.attr('href', 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageUrl + '&width=505');
+
+        			}else{
+        				$('.preview_and_download').slideUp('fast');
+        			}
+
+                    $getWidth.keyup(function() {
+                        $dlBtn.attr('href', 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageUrl + '&width=' + $(this).val() );
+                    });
+
+        		});
+
+        	});
+        </script>
+    </body>
+</html>
