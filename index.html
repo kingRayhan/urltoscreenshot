@@ -196,14 +196,9 @@ footer {
         		/**
         		 * anable download button by reCapcha
         		 */
-        		if (grecaptcha.getResponse()) {
-        			$dlBtn.removeAttr('disabled');
-        		}else{
-        			$dlBtn.attr('disabled', 'disabled');
-        		}
-function recaptchaCallback() {
-    $dlBtn.removeAttr('disabled')
-};
+				function recaptchaCallback() {
+				    $dlBtn.removeAttr('disabled')
+				};
 
 
         	});
