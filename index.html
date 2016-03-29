@@ -107,7 +107,7 @@ footer {
         		<div class="row">
         			<div class="page_preview text-center">
         			<h3>Preview</h3>
-        				<img id="urlPreview" src="loading.gif" alt="">
+        				<img id="urlPreview" src="loading.gif" alt="please wait...">
         			</div>
         			<div class="downloadScreenshot">
         				<div class="dl_options text-center">
@@ -129,30 +129,62 @@ footer {
     </div>
 </footer>
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="assets/jquery.elevatezoom.js"></script>
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
         <script>
         	jQuery(document).ready(function($) {
-                var $dlBtn = $('#screenshot_dl_btn');
-                var $getWidth = $('#dl_img_width');
+
+        		// take screenshot
+                var $dlBtn = $('#screenshot_dl_btn'); // Download Button
+                var $getWidth = $('#dl_img_width');  
                 var $urlPreview = $('#urlPreview');
                 var $url = $('#url');
-        		$url.keyup(function() {
+                function getImageLink(pageLink , width){
+                	return 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageLink + '&width=' + width;
+                }
+
+
+        		$url.keyup(function() { 
+        			/**
+        			 * Get page url from url field
+        			 */
         			var pageUrl = $('#url').val();
         			
-        			if ( pageUrl != '' ) {
-        				$('.preview_and_download').slideDown('fast');
-        				$urlPreview.attr('src', 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageUrl + '&width=505');
-        				$dlBtn.attr('href', 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageUrl + '&width=505');
+        			if ( pageUrl != '' ) { // if url field is not empty
+        				 	$($urlPreview).elevateZoom();
+	        				/**
+	        				 * Slide down the .preview_and_download wrapper when page url is given in the url field
+	        				 */
+	        				$('.preview_and_download').slideDown('fast');
+	        				/**
+	        				 * add screenshot link in website preview img tag
+	        				 */
+	        				$urlPreview.attr({
+	        					'src' : getImageLink(pageUrl , 600),
+	        					'data-zoom-image' : getImageLink(pageUrl , 1200)
+	        				});
+	        				/**
+	        				 * add screenshot link to the download button
+	        				 */
+	        				$dlBtn.attr('href', getImageLink(pageUrl , 505) );
 
-        			}else{
+        			}else{ // if url field is empty
+        				/**
+        				 * Hide the .preview_and_download wrapper when page url field is empty
+        				 */
         				$('.preview_and_download').slideUp('fast');
         			}
 
+        			/**
+        			 * overwrite download button link
+        			 */
                     $getWidth.keyup(function() {
-                        $dlBtn.attr('href', 'https://api.thumbnail.ws/api/ab474153db3992639390e270d78a4867770a0dbaff7a/thumbnail/get?url=' + pageUrl + '&width=' + $(this).val() );
+                        $dlBtn.attr('href', getImageLink( pageUrl , $(this).val() ) );
                     });
 
         		});
+
+
 
         	});
         </script>
