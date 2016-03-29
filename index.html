@@ -121,7 +121,7 @@ footer {
         				</div>
         				<div class="dl_btn text-center">
         					<div class="g-recaptcha" data-sitekey="6Lex-hsTAAAAACiZgx373MzuRb_gehz4T9tiep_4"></div>
-        					<a id="screenshot_dl_btn" class="btn btn-default btn-lg" download><span class="glyphicon glyphicon-circle-arrow-down"></span> Download screenshot</a>
+        					<a id="screenshot_dl_btn" class="btn btn-default btn-lg" download disabled='disabled'><span class="glyphicon glyphicon-circle-arrow-down"></span> Download screenshot</a>
         				</div>
         			</div>
         		</div>
@@ -192,6 +192,15 @@ footer {
                     });
 
         		});
+
+        		/**
+        		 * anable download button by reCapcha
+        		 */
+        		if (grecaptcha.getResponse()) {
+        			$dlBtn.removeAttr('disabled');
+        		}else{
+        			$dlBtn.attr('disabled', 'disabled');
+        		}
 
 
 
